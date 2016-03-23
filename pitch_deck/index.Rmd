@@ -1,0 +1,52 @@
+---
+title       : Cars
+subtitle    : The Relationship Between a car's Weight and MPG
+author      : Goran 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+#github      :
+#  user: goras0
+#  repo: Coursera_Data_Products
+---
+
+## The Relationship Between a car's Weight and MPG
+
+1. How are the relationship between a car's Weight and MPG?
+2. How does the linear relation between them look?
+3. Is your car on the list?
+
+--- .class #id 
+
+## Scatter Plot
+```{r, echo=FALSE}
+plot(mtcars$wt, mtcars$mpg, xlab="Car Weight", ylab="Miles Per Gallon", pch=18, col="blue")  
+```
+
+View a Scatter plot 
+
+--- .class #id 
+
+## Regression Line
+```{r, echo=FALSE}
+plot(mtcars$wt, mtcars$mpg, xlab="Car Weight", ylab="Miles Per Gallon", pch=18, col="blue") 
+abline(lm(mtcars$mpg~mtcars$wt)) 
+```
+
+Draw a best fit regression line
+
+--- .class #id 
+ 
+## Label the Points
+```{r, echo=FALSE}
+plot(mtcars$wt, mtcars$mpg, xlab="Car Weight", ylab="Miles Per Gallon", pch=18, col="blue") 
+text(mtcars$wt, mtcars$mpg, row.names(mtcars), cex=0.6, pos=4, col="red")
+```
+ 
+Label the points to see if your car is in the plot.
+
+
