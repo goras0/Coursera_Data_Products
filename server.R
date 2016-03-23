@@ -1,21 +1,31 @@
-library(shiny)
+# server.R
 
-# Define server logic required to draw a histogram
+
 shinyServer(function(input, output) {
-  
-  # Expression that generates a histogram. The expression is
-  # wrapped in a call to renderPlot to indicate that:
-  #
-  #  1) It is "reactive" and therefore should be automatically
-  #     re-executed when inputs change
-  #  2) Its output type is a plot
-  
-  output$distPlot <- renderPlot({
-    x    <- faithful[, 2]  # Old Faithful Geyser data
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+
+  data <- reactive({
+    validate(
+      need(input$help == FALSE, "This application generates a scatter plot between automobile weight on the horizontal axis and miles per gallon on the vertical axis. Check best fit to add a line of best fit. Check labeling to add labeling points.")
+    )
+
   })
+    
+    
+  output$plot <- renderPlot({
+    p <- plot(mtcars$wt, mtcars$mpg, xlab="Car Weight", ylab="Miles Per Gallon", pch=18, col="blue")  
+    
+    if (input$labeling)
+      p <- text(mtcars$wt, mtcars$mpg, row.names(mtcars), cex=0.6, pos=4, col="red")
+    
+    if (input$bestFit)
+      p <- p + abline(lm(mtcars$mpg~mtcars$wt)) 
+
+    print(p)
+  })
+  
+  output$table <- renderTable({
+    head(data())
+  })
+
   
 })

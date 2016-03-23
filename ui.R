@@ -4,21 +4,22 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Hello Shiny!"),
+  titlePanel("Cars"),
   
   # Sidebar with a slider input for the number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      checkboxInput("bestFit", "regression best fit"),
+      checkboxInput("labeling", "labeling points"),
+      checkboxInput("help", "help")
+      
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      h3('Scatter plot between MPG and Weight'),
+      tableOutput("table"),
+      plotOutput("plot")
     )
   )
 ))
